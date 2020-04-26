@@ -1,0 +1,117 @@
+logging:
+  level: "DEBUG"
+
+pipeline:
+  enabled:
+    get-raw-data: true
+    clean-data: true
+    analyse: true
+    geocode: true
+
+storage:
+  table:
+    raw: "raw_property_sales"
+    transformed: "transformed_property_sales"
+
+register:
+  download:
+    enabled: true
+    url: "https://www.propertypriceregister.ie/website/npsra/ppr/npsra-ppr.nsf/Downloads/PPR-ALL.zip/$FILE/PPR-ALL.zip"
+  csv:
+    output:
+      path: "resources/"
+      file: "property_sales.csv"
+  persist:
+    enabled: true
+
+data_clean:
+  sanitiser:
+    enabled: true
+  output:
+    enabled: true
+    path: "output/data_clean/"
+  persist:
+    enabled: true
+
+analysis:
+  totals:
+    enabled: true
+  plots:
+    output:
+      enabled: true
+      path: "output/analysis/plots/"
+    show:
+      enabled: true
+    upload:
+      enabled: true
+  output:
+    transformed:
+      enabled: true
+      path: "output/analysis/"
+    descriptives:
+      enabled: true
+      path: "output/analysis/descriptives/"
+
+geocoding:
+  database: "geocoding"
+  store: "property_sale_address"
+  processed-suffix: "_processed"
+  flush-count: 1000
+  timeout: 5
+  export:
+    enabled: true
+    path: "output/geocoding/"
+
+postgres:
+  connection: "dbname=postgres user=paddyIgoe host=localhost"
+mongo:
+  connection: "mongodb://localhost:27017/"
+
+plotly:
+  template: "plotly_dark"
+  chart-studio:
+    username: "pad_nci"
+
+geocoders:
+  nominatim:
+    enabled: true
+    domain: "localhost:7070"
+    scheme: "http"
+    flush-count: 10
+    max-requests: 10
+  bing:
+    enabled: true
+    flush-count: 10
+    max-requests: 10
+  arcgis:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  here:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  photon:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  azure:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  mapbox:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  opencage:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  tomtom:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
+  google:
+    enabled: false
+    flush-count: 10
+    max-requests: 10
