@@ -16,6 +16,7 @@ logging.basicConfig(stream=sys.stdout,
                     datefmt='%Y-%m-%d,%H:%M:%S',
                     level=logging.getLevelName(config['logging']['level']))
 
+logging.getLogger('urllib3').setLevel(logging.WARN)
 
 def __finditem(obj, key):
     if key in obj:

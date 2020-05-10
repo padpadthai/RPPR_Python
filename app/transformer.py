@@ -109,7 +109,6 @@ def transform_address(address: str, postcode: str, county: str) -> str:
     for key, value in address_abbreviations.items():  # replace abbreviations
         if key.search(new_address):
             new_address = re.sub(key, " " + value + " ", new_address)
-    # logging.debug("'{}' -> '{}'".format(address, new_address))
     return new_address
 
 
@@ -144,9 +143,12 @@ class TransformedPropertySale:
 
 
 def transformed_from_raw(raw_property_sale: RawPropertySale) -> TransformedPropertySale:
-    return TransformedPropertySale(raw_property_sale.app_id, transform_date(raw_property_sale.date),
+    sale = TransformedPropertySale(raw_property_sale.app_id, transform_date(raw_property_sale.date),
                transform_address(raw_property_sale.address, raw_property_sale.postcode, raw_property_sale.county),
                raw_property_sale.postcode, raw_property_sale.county, transform_price(raw_property_sale.price),
                raw_property_sale.not_full_price == "No", raw_property_sale.vat_exclusive == "Yes",
                raw_property_sale.property_description == "New Dwelling house /Apartment",
                transform_size_description(raw_property_sale.size_description))
+    logging.debug("{} - {} - {} - {} -> {} - {} - {} - {}".format(raw_property_sale.date, raw_property_sale.address,
+                  raw_property_sale.size_description, raw_property_sale.price, sale.date, sale.address, sale.size, sale.price))
+    return sale

@@ -22,6 +22,7 @@ pio.templates.default = config['plotly']['template']
 chart_studio.tools.set_credentials_file(username=config['plotly']['chart-studio']['username'],
                                         api_key=secrets['api-key']['chart-studio'])
 
+
 class Analyser:
 
     def __init__(self, property_sales: List[TransformedPropertySale]):

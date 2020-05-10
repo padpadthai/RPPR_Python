@@ -19,4 +19,4 @@ To run the app you need to run [main.py](app/main.py) using a Python interpreter
 These keys should be added to a secrets.yaml file under the resources directory.
 The Chart Studio username should be changed in the [config](resources/config.yaml) file*
 
-A [config](resources/config.yaml) is provided that enables you to modularise the project and enable/disable features.
+A [config](resources/config.yaml) file is provided that enables you to modularise the project and enable/disable features.
